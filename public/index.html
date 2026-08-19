@@ -90,17 +90,28 @@
       </div>
       <div class="modal-body">
         <div class="field">
-          <label>عنوان الخادم (Base URL)</label>
-          <input type="text" id="setBaseUrl" placeholder="http://localhost:11434/v1" />
-          <small>أمثلة: Ollama → <code>http://localhost:11434/v1</code> · LM Studio → <code>http://localhost:1234/v1</code></small>
+          <label>المزوّد</label>
+          <div class="provider-presets" id="providerPresets">
+            <button class="preset" data-base="https://router.huggingface.co/v1" data-name="Hugging Face">🤗 Hugging Face</button>
+            <button class="preset" data-base="http://localhost:11434/v1" data-name="Ollama">🦙 Ollama</button>
+            <button class="preset" data-base="http://localhost:1234/v1" data-name="LM Studio">💻 LM Studio</button>
+            <button class="preset" data-base="" data-name="مخصص">⚙️ مخصص</button>
+          </div>
         </div>
         <div class="field">
-          <label>مفتاح API (اختياري)</label>
-          <input type="password" id="setApiKey" placeholder="sk-…" />
+          <label>عنوان الخادم (Base URL)</label>
+          <input type="text" id="setBaseUrl" placeholder="https://router.huggingface.co/v1" />
+          <small>أمثلة: Hugging Face → <code>https://router.huggingface.co/v1</code> · Ollama → <code>http://localhost:11434/v1</code></small>
+        </div>
+        <div class="field">
+          <label>مفتاح API</label>
+          <input type="password" id="setApiKey" placeholder="hf_… أو sk-…" />
         </div>
         <div class="field">
           <label>النموذج الافتراضي</label>
-          <input type="text" id="setModel" placeholder="dolphin-llama3 أو wizardlm-uncensored" />
+          <input type="text" id="setModel" placeholder="alpindale/WizardLM-2-8x22B" />
+          <small>نماذج مقترحة متاحة مجانًا على Hugging Face: <code>alpindale/WizardLM-2-8x22B</code> · <code>NousResearch/Hermes-3-Llama-3.1-70B</code> · <code>Sao10K/L3-8B-Stheno-v3.2</code></small>
+        </div>
         </div>
         <div class="field">
           <label>موجّه النظام (System Prompt)</label>

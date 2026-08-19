@@ -410,6 +410,20 @@ html, body {
 .field-row .field { flex: 1; }
 .field .check { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--text); cursor: pointer; }
 .field input[type="checkbox"] { accent-color: var(--accent); width: 17px; height: 17px; }
+.provider-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.preset {
+  padding: 8px 14px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color .12s, background .12s;
+}
+.preset:hover { border-color: var(--accent); }
+.preset.active { border-color: var(--accent); background: rgba(108,124,255,.12); }
 .modal-foot {
   display: flex;
   justify-content: flex-end;

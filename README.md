@@ -24,10 +24,19 @@ npm start
 
 | المزوّد | Base URL |
 |---|---|
+| Hugging Face (Inference Providers) | `https://router.huggingface.co/v1` |
 | Ollama | `http://localhost:11434/v1` |
 | LM Studio | `http://localhost:1234/v1` |
 | llama.cpp server | `http://localhost:8080/v1` |
 | vLLM | `http://localhost:8000/v1` |
+
+### Hugging Face
+استخدم توكن Hugging Face (`hf_…`) كمفتاح API، واختر أي نموذج متاح عبر Inference Providers. نماذج مجانية تعمل مثلًا:
+- `alpindale/WizardLM-2-8x22B`
+- `NousResearch/Hermes-3-Llama-3.1-70B`
+- `Sao10K/L3-8B-Stheno-v3.2`
+
+> **ملاحظة:** نماذج مثل `dolphin-llama3` و `wizardlm-uncensored` غير متاحة على الواجهة المجانية السحابية؛ لتشغيلها استخدم Ollama محليًا (انظر أدناه).
 
 ثم اختر النموذج من القائمة المنسدلة في الأعلى (أو اكتب اسمه يدويًا).
 

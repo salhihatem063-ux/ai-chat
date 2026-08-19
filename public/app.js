@@ -462,6 +462,15 @@ async function init() {
   $("setTemperature").oninput = (e) => ($("tempVal").textContent = e.target.value);
   $("setTopP").oninput = (e) => ($("topPVal").textContent = e.target.value);
 
+  // أزرار اختيار المزوّد
+  document.querySelectorAll(".preset").forEach((btn) => {
+    btn.onclick = () => {
+      $("setBaseUrl").value = btn.dataset.base;
+      document.querySelectorAll(".preset").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    };
+  });
+
   $("themeBtn").onclick = () => {
     document.body.classList.toggle("light");
     $("themeLabel").textContent = document.body.classList.contains("light") ? "الوضع الداكن" : "الوضع الفاتح";
