@@ -34,8 +34,20 @@ npm start
 ### مثال: تشغيل نموذج عبر Ollama
 ```bash
 ollama serve
-ollama pull llama3.1        # أو أي نموذج آخر
+ollama pull dolphin-llama3          # نموذج Dolphin (غير مُرشَّح بدرجة أعلى)
+# أو
+ollama pull wizardlm-uncensored     # WizardLM Uncensored
 ```
+
+ثم من الإعدادات ضع `http://localhost:11434/v1` واختر النموذج من القائمة.
+
+### النماذج المقترحة
+| النموذج | الوصف |
+|---|---|
+| `dolphin-llama3` | نسخة Dolphin من Llama 3 — مُدرَّبة بحرّية استجابة أوسع |
+| `wizardlm-uncensored` | نسخة WizardLM غير المُرشَّحة |
+
+> **مهم:** هذه النماذج لا تعمل على خادم Render نفسه (لا توجد GPU على الخطة المجانية). يجب تشغيلها عبر Ollama على جهازك (أو خادم GPU)، ثم ربط الموقع بها عبر الإعدادات.
 
 ## متغيرات البيئة (اختيارية)
 - `PORT` — منفذ الخادم (افتراضي 3000).

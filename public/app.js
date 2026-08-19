@@ -157,7 +157,7 @@ async function loadConversations() {
     const item = document.createElement("div");
     item.className = "conv-item" + (c.id === state.currentConvId ? " active" : "");
     item.innerHTML = `<span class="title">${escapeHtml(c.title)}</span>`;
-    item.onclick = () => openConversation(c.id);
+    item.onclick = () => { openConversation(c.id); toggleSidebar(false); };
 
     const del = document.createElement("button");
     del.className = "del";
@@ -434,14 +434,24 @@ function autoResize() {
   input.style.height = Math.min(input.scrollHeight, 200) + "px";
 }
 
+// ===== الشريط الجانبي =====
+function toggleSidebar(force) {
+  const sb = $("sidebar");
+  const bd = $("sidebarBackdrop");
+  const open = force !== undefined ? force : sb.classList.contains("collapsed");
+  sb.classList.toggle("collapsed", !open);
+  bd.classList.toggle("show", open);
+}
+
 // ===== التهيئة =====
 async function init() {
   await loadSettings();
   await loadModels();
 
-  $("newChatBtn").onclick = newConversation;
+  $("newChatBtn").onclick = () => { newConversation(); toggleSidebar(false); };
   $("sendBtn").onclick = sendMessage;
-  $("menuBtn").onclick = () => $("sidebar").classList.toggle("collapsed");
+  $("menuBtn").onclick = () => toggleSidebar();
+  $("sidebarBackdrop").onclick = () => toggleSidebar(false);
   $("settingsBtn").onclick = openSettings;
   $("closeSettings").onclick = closeSettings;
   $("cancelSettings").onclick = closeSettings;
