@@ -15,10 +15,10 @@ app.use(express.json({ limit: "2mb" }));
 const defaultSettings = {
   baseUrl: process.env.AI_BASE_URL || "http://localhost:11434/v1",
   apiKey: process.env.AI_API_KEY || "",
-  model: process.env.AI_MODEL || "dolphin-llama3",
+  model: process.env.AI_MODEL || "Sao10K/L3-8B-Stheno-v3.2",
   systemPrompt: "أنت مساعد ذكاء اصطناعي مفيد ودقيق.",
   temperature: 0.7,
-  maxTokens: 2048,
+  maxTokens: 1024,
   topP: 1.0,
   stream: true
 };

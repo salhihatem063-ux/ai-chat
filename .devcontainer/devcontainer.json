@@ -1,0 +1,31 @@
+{
+  "name": "AI Chat + Ollama (dolphin-llama3)",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "hostRequirements": {
+    "memory": "16gb"
+  },
+  "features": {
+    "ghcr.io/prulloac/devcontainer-features/ollama:1": {
+      "pull": ["dolphin-llama3"]
+    }
+  },
+  "forwardPorts": [3000, 11434],
+  "portsAttributes": {
+    "3000": {
+      "label": "AI Chat",
+      "onAutoForward": "notify"
+    },
+    "11434": {
+      "label": "Ollama",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm install && (ollama serve > /tmp/ollama.log 2>&1 &) && sleep 5 && ollama pull dolphin-llama3 && echo '=== جاهز! شغّل: npm start ==='",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.tabSize": 2
+      }
+    }
+  }
+}
