@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chat — محادثة ذكاء اصطناعي</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- الشريط الجانبي -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <button class="new-chat" id="newChatBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          محادثة جديدة
+        </button>
+      </div>
+      <div class="conv-list" id="convList"></div>
+      <div class="sidebar-foot">
+        <button class="foot-btn" id="settingsBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.01a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          الإعدادات
+        </button>
+        <button class="foot-btn" id="themeBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+          <span id="themeLabel">الوضع الفاتح</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- المحتوى -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="model-picker">
+          <label for="modelSelect">النموذج</label>
+          <select id="modelSelect"></select>
+          <button class="refresh-models" id="refreshModels" title="تحديث قائمة النماذج">
+            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 12a9 9 0 11-2.64-6.36M21 3v6h-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="spacer"></div>
+        <button class="icon-btn" id="exportBtn" title="تصدير المحادثة">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </header>
+
+      <div class="chat" id="chat">
+        <div class="welcome" id="welcome">
+          <div class="logo">
+            <svg viewBox="0 0 24 24" width="36" height="36"><path d="M12 2a7 7 0 017 7c0 2.4-1.2 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 017-7z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 21h6M10 18v3M14 18v3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </div>
+          <h1>مرحبًا بك</h1>
+          <p>ابدأ محادثة مع نموذج الذكاء الاصطناعي. كل البيانات تُحفظ محليًا على جهازك.</p>
+          <div class="suggestions" id="suggestions">
+            <button class="suggestion">اشرح لي مفهومًا تقنيًا</button>
+            <button class="suggestion">اكتب لي نصًا إبداعيًا</button>
+            <button class="suggestion">ساعدني في كتابة كود</button>
+            <button class="suggestion">لخّص لي مقالًا</button>
+          </div>
+        </div>
+        <div class="messages" id="messages"></div>
+      </div>
+
+      <footer class="composer-wrap">
+        <div class="composer" id="composer">
+          <textarea id="input" rows="1" placeholder="اكتب رسالتك هنا… (Enter للإرسال، Shift+Enter لسطر جديد)"></textarea>
+          <div class="composer-actions">
+            <span class="status" id="status"></span>
+            <button class="send-btn" id="sendBtn" title="إرسال">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- نافذة الإعدادات -->
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>الإعدادات</h2>
+        <button class="icon-btn" id="closeSettings">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>عنوان الخادم (Base URL)</label>
+          <input type="text" id="setBaseUrl" placeholder="http://localhost:11434/v1" />
+          <small>أمثلة: Ollama → <code>http://localhost:11434/v1</code> · LM Studio → <code>http://localhost:1234/v1</code></small>
+        </div>
+        <div class="field">
+          <label>مفتاح API (اختياري)</label>
+          <input type="password" id="setApiKey" placeholder="sk-…" />
+        </div>
+        <div class="field">
+          <label>النموذج الافتراضي</label>
+          <input type="text" id="setModel" placeholder="مثال: llama3.1" />
+        </div>
+        <div class="field">
+          <label>موجّه النظام (System Prompt)</label>
+          <textarea id="setSystemPrompt" rows="4"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>الحرارة (Temperature) <span id="tempVal">0.7</span></label>
+            <input type="range" id="setTemperature" min="0" max="2" step="0.05" value="0.7" />
+          </div>
+          <div class="field">
+            <label>أقصى عدد رموز (Max Tokens)</label>
+            <input type="number" id="setMaxTokens" min="1" max="32768" value="2048" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Top-P <span id="topPVal">1.0</span></label>
+            <input type="range" id="setTopP" min="0" max="1" step="0.05" value="1" />
+          </div>
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="setStream" checked />
+              البثّ اللحظي للردود
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn ghost" id="cancelSettings">إلغاء</button>
+        <button class="btn primary" id="saveSettings">حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

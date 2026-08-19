@@ -1,0 +1,17 @@
+{
+  "name": "ai-chat",
+  "version": "1.0.0",
+  "description": "واجهة محادثة ذكاء اصطناعي قابلة للربط بأي نموذج (Ollama / OpenAI-compatible)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}
